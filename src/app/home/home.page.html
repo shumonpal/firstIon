@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Ion Shop</ion-title>
+    <!-- <ion-icon slot="end" name="add-circle"></ion-icon> -->
+    <ion-button slot="end" class="ion-margin-end" (click)="showModal()"> 
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <div>
+    <ion-grid>
+      <ion-row><!-- first row -->
+        <ion-slides [options]="slideOptsOne">
+          <ion-slide *ngFor="let slideItem of products">
+            <div class="overlay">
+              <img src="assets/images/banners/banner.jpg" class="slider-img">
+            </div><!--overlay-->
+            <!-- <div class="card-title">{{slideItem.name}}</div> -->
+          </ion-slide>
+          <ion-slide>
+            <div class="overlay">
+              <img src="assets/images/banners/banner.jpg" class="slider-img">
+            </div><!--overlay-->
+            <!-- <div class="card-title">Banner Name 3</div> -->
+          </ion-slide>
+          <ion-slide>
+            <div class="overlay">
+              <img src="assets/images/banners/banner.jpg" class="slider-img">
+            </div><!--overlay-->
+            <!-- <div class="card-title">Banner Name 4</div> -->
+          </ion-slide>
+        </ion-slides>
+      </ion-row><!-- first row -->      
+    </ion-grid>
+
+    <ion-list>
+      <ion-item *ngFor="let product of products">
+        <ion-thumbnail slot="start">
+          <img src="{{product.image || 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y'}}">
+        </ion-thumbnail>
+        <ion-label>
+          <h3><small>Name: </small>{{product.name}}</h3>
+          <p><small>Brand: </small>{{product.brand}}</p>
+          <p><small>Price: </small>{{product.price}}</p>
+        </ion-label>
+        <ion-label slot="end">
+          <!-- <ion-button (click)="productDetails(product.id)" fill="clear" shape="round">
+            Details
+          </ion-button> -->
+          <ion-button (click)="productDetails(product.id)">
+            <ion-icon slot="icon-only" name="eye" ></ion-icon>
+          </ion-button>
+          <ion-button (click)="productDelete(product.id, product.image)" color="danger">
+            <ion-icon slot="icon-only" name="close" ></ion-icon>
+          </ion-button>
+        </ion-label>
+      </ion-item>
+    
+    </ion-list>
+    
+
+   
+    <ion-spinner *ngIf="itemSpinner" name="bubbles" color="primary"  class="item-spinner"></ion-spinner>
+    
+  </div>
+</ion-content>
+
+
+
+

@@ -1,0 +1,83 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- <ion-menu-button></ion-menu-button> -->
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+    </ion-buttons>
+    <ion-title>{{product.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngIf="!editProduct$ && !itemSpinner">
+    <img [src]="product.image" />
+    <ion-card-header>
+      <ion-card-title><small>Name: </small>{{product.name}}</ion-card-title>
+      <ion-card-subtitle><small>Brand: </small>{{product.brand}}</ion-card-subtitle>
+      <ion-card-subtitle><small>Price: </small>{{product.price}}</ion-card-subtitle>
+      <ion-card-subtitle><small>Size: </small>{{product.size}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
+    </ion-card-content>
+    <ion-button (click)="editProduct()" expand="block" shape="round">
+      Edit
+    </ion-button>
+  </ion-card>
+
+  <ion-card *ngIf="editProduct$">    
+    <ion-card-content>
+      <form [formGroup]="editProductForm" (submit)="updateProduct()">
+        <ion-list>
+        <ion-item>
+          <ion-label position="floating">Product Name</ion-label>
+          <ion-input  type="text" name="name" formControlName="name"></ion-input>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" >{{formErrorMsg.name}}</div>
+        <ion-item>
+          <ion-label position="floating">Price</ion-label>
+          <ion-input  type="number" name="price" formControlName="price"></ion-input>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" >{{formErrorMsg.price}}</div>
+        <ion-item>
+          <ion-label position="floating">Brand</ion-label>
+          <ion-input  type="text" name="brand" formControlName="brand"></ion-input>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" >{{formErrorMsg.brand}}</div>
+        <ion-item>
+          <ion-label>Size</ion-label>
+          <ion-select name="size" placeholder="Select Size"  formControlName="size">
+            <ion-select-option value="s">Small</ion-select-option>
+            <ion-select-option value="m">Medium</ion-select-option>
+            <ion-select-option value="x">Large</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" >{{formErrorMsg.size}}</div>
+        
+        <div class="ion-text-start error-msg-font"  color="danger" >{{formErrorMsg.image}}</div>
+        <ion-item lines="none"   class="ion-margin-top ion-margin-bottom">
+          <div class="center ion-activatable ripple-parent">
+              <ion-button (click)="editProduct$ = false" size="default" fill="clear" shape="round">
+                Cencel
+              </ion-button>
+              <ion-button size="default" color="tertiary" [disabled]="editProductForm.invalid"  type="submit"  shape="round">
+                Update
+                <ion-spinner *ngIf="showSpinner" name="dots"></ion-spinner>
+              </ion-button>
+          </div>
+        </ion-item>
+      </ion-list>
+      </form>
+    </ion-card-content>
+  </ion-card>
+   
+  <ion-spinner *ngIf="itemSpinner" name="bubbles" color="primary"  class="item-spinner"></ion-spinner>
+ 
+</ion-content>
+
+
+
+
+

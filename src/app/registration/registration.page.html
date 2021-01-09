@@ -1,0 +1,70 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- <ion-menu-button></ion-menu-button> -->
+      <ion-back-button defaultHref="login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registration</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Registration</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-card>
+      <ion-card-header>
+        
+        <ion-card-title>Registration</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <form [formGroup]="regiForm">
+        <ion-item>
+          <ion-label position="floating">Full Name</ion-label>
+          <ion-input formControlName="fullName" type="text" name="fullName"></ion-input>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" > {{initErrorFormMsg.fullName}}</div>
+        <ion-item>
+          <ion-label position="floating">E-mail</ion-label>
+          <ion-input formControlName="email" type="email" name="email"></ion-input>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" > {{initErrorFormMsg.email}}</div>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input  formControlName="password" type="password" name="password"></ion-input>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" >{{initErrorFormMsg.password}}</div>        
+        <ion-item>
+          <ion-label position="floating">Conform Password</ion-label>
+          <ion-input  formControlName="confirmPassword" type="password" name="confirm_password"></ion-input>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" >{{initErrorFormMsg.confirmPassword}}</div>        
+        <div *ngIf="matchPassword" class="ion-text-start error-msg-font"  color="danger" >Confirm password not match with password</div>        
+        <ion-item>
+          <ion-label position="floating">Address</ion-label>
+          <ion-input formControlName="address" type="text" name="address"></ion-input>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" > {{initErrorFormMsg.address}}</div>
+        <ion-item lines="none">
+          <div class="center ion-activatable ripple-parent">
+            <ion-button size="default" color="success" (click)="regiSubmit()" [disabled]="regiForm.invalid">
+              Registration
+              <ion-spinner *ngIf="showSpinner" name="dots"></ion-spinner>
+            </ion-button>
+          </div>
+        </ion-item>
+        <div>Already have an account? <a (click)="gotoSigninPage($event)" href="#">Sign in</a></div>
+      </form>
+      </ion-card-content>
+    </ion-card>
+ 
+    
+  
+  </div>
+</ion-content>
+

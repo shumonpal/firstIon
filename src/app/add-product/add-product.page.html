@@ -1,0 +1,65 @@
+
+
+
+
+  <div>
+    <ion-header translucent>
+      <ion-toolbar>
+        <ion-title>Modal Content</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="dismissModal()"><ion-icon name="close-outline"></ion-icon></ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    
+    <ion-card>    
+      <ion-card-content>
+       <form [formGroup]="addProductForm" (submit)="saveProduct($event)">
+        <ion-list>
+        <ion-item>
+          <ion-label position="floating">Product Name</ion-label>
+          <ion-input  type="text" name="name" formControlName="name"></ion-input>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" >{{formErrorMsg.name}}</div>
+        <ion-item>
+          <ion-label position="floating">Price</ion-label>
+          <ion-input  type="number" name="price" formControlName="price"></ion-input>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" >{{formErrorMsg.price}}</div>
+        <ion-item>
+          <ion-label position="floating">Brand</ion-label>
+          <ion-input  type="text" name="brand" formControlName="brand"></ion-input>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" >{{formErrorMsg.brand}}</div>
+        <ion-item>
+          <ion-label>Size</ion-label>
+          <ion-select name="size" placeholder="Select Size"  formControlName="size">
+            <ion-select-option value="s">Small</ion-select-option>
+            <ion-select-option value="m">Medium</ion-select-option>
+            <ion-select-option value="x">Large</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" >{{formErrorMsg.size}}</div>
+        <ion-item>
+          <ion-input  type="file" name="image" formControlName="image" ref="image"
+          accept="image/*"
+          autocomplete="off"></ion-input>
+        </ion-item>
+        <div class="ion-text-start error-msg-font"  color="danger" >{{formErrorMsg.image}}</div>
+        <ion-item lines="none"   class="ion-margin-top">
+          <div class="center ion-activatable ripple-parent">
+            <ion-button size="default" color="tertiary" [disabled]="addProductForm.invalid"  type="submit" class="ion-margin-bottom">
+            Save
+            <ion-spinner *ngIf="showSpinner" name="dots"></ion-spinner>
+            </ion-button>
+          </div>
+        </ion-item>
+      </ion-list>
+      </form>
+      </ion-card-content>
+    </ion-card>
+ 
+    
+  
+  </div>
+
